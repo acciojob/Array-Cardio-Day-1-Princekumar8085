@@ -29,21 +29,24 @@ const people = [
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's and return the filtered array
 export function myfilter() {
-
+  const filteredInventors = inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600);
+  return filteredInventors;
 }
 
 // Array.prototype.map()
 // 2. Give us an array of the inventor first and last names (i.e. full name)
 // Ex: For the first inventor the full name will be 'Albert Einstein'
 export function map() {
-
+ const names = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+  return names;
 }
 
 
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest and return the sorted array
 export function sort() {
-
+  const sorted = inventors.sort((a, b) => a.year - b.year);
+  return sorted;
 }
 
 
@@ -51,17 +54,45 @@ export function sort() {
 // 4. How many years did all the inventors live?
 // Return the total number of years all the inventors lived
 export function reduce() {
+const totalYears = inventors.reduce((acc, inventor) => {
+    return acc + (inventor.passed - inventor.year);
+  }, 0);
+  
+  return totalYears;
 
 }
 
 // 5. Sort the inventors by years lived and return the sorted array
 export function sortbylived() {
-
+ const sorted = inventors.sort(function(a, b) {
+    const lastInventor = a.passed - a.year;
+    const nextInventor = b.passed - b.year;
+    return lastInventor > nextInventor ? -1 : 1;
+  });
+  return sorted;
 }
 
 // 6. sort Exercise
 // Sort the people alphabetically by last name and return the sorted array
 export function sortByLastName() {
+const sortedPeople = people.sort((a, b) => {
+    // split the full names into first and last names
+    const [aLast, aFirst] = a.split(', ');
+    const [bLast, bFirst] = b.split(', ');
+
+    // compare the last names
+    if (aLast < bLast) return -1;
+    if (aLast > bLast) return 1;
+
+    // if last names are the same, compare the first names
+    if (aFirst < bFirst) return -1;
+    if (aFirst > bFirst) return 1;
+
+    // if both first and last names are the same, return 0
+    return 0;
+  });
+
+  return sortedPeople;
 
 }
 
@@ -70,5 +101,12 @@ export function sortByLastName() {
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
 
 export function reducedSum() {
+	  return data.reduce((obj, item) => {
+    if (!obj[item]) {
+      obj[item] = 0;
+    }
+    obj[item]++;
+    return obj;
+  }, {});
     // Return an object containing transports as key and its number of occurances as the key's value
 }
