@@ -75,24 +75,11 @@ export function sortbylived() {
 // 6. sort Exercise
 // Sort the people alphabetically by last name and return the sorted array
 export function sortByLastName() {
-const sortedPeople = people.sort((a, b) => {
-    // split the full names into first and last names
+ return people.sort((a, b) => {
     const [aLast, aFirst] = a.split(', ');
     const [bLast, bFirst] = b.split(', ');
-
-    // compare the last names
-    if (aLast < bLast) return -1;
-    if (aLast > bLast) return 1;
-
-    // if last names are the same, compare the first names
-    if (aFirst < bFirst) return -1;
-    if (aFirst > bFirst) return 1;
-
-    // if both first and last names are the same, return 0
-    return 0;
+    return aLast.localeCompare(bLast) || aFirst.localeCompare(bFirst);
   });
-
-  return sortedPeople;
 
 }
 
